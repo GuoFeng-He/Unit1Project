@@ -4,6 +4,7 @@ package com.example.unit1project
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var view: LinearLayout
     private lateinit var infoText: TextView
 
+    private lateinit var hardMode: CheckBox
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         orangeBox= findViewById(R.id.orange_box)
         view= findViewById(R.id.main)
         infoText= findViewById(R.id.text)
+        hardMode = findViewById(R.id.checkBox)
         val button: Button = findViewById(R.id.button)
-
-
+        
         button.setOnClickListener {
             updateScore("reset")
 
@@ -79,6 +82,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
+            hardMode.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (!endGame()) {
+                    bigger = updateNumbers()
+                }
+            }
         }
     }
 
@@ -86,9 +95,9 @@ class MainActivity : AppCompatActivity() {
         return if (e[0] > e[1]) 0 else 1
     }
 
-    private fun randList(): List<Int>{
-        val rand = Random.nextInt(100)
-        var rand2 = Random.nextInt(100)
+    private fun randList(upper: Int): List<Int>{
+        val rand = Random.nextInt(upper)
+        var rand2 = Random.nextInt(upper)
 
 
         while(rand2 == rand){
@@ -125,6 +134,7 @@ class MainActivity : AppCompatActivity() {
             strikes = 0
             scoreText.setTextColor(Color.BLACK)
             strikesText.setTextColor(Color.BLACK)
+            view.setBackgroundColor(Color.parseColor("#FFFDEF74"))
         }
 
         scoreText.text = "Score: $score"
@@ -132,7 +142,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateNumbers(): Int{
-        val numbers: List<Int> = randList()
+        val numbers: List<Int> =
+            if (hardMode.isChecked){
+                randList(1000)
+            } else{
+                randList(100)
+            }
+
         val bigger: Int = greaterValue(numbers)
 
         blueBox.text = numbers[0].toString()
@@ -143,8 +159,8 @@ class MainActivity : AppCompatActivity() {
     private fun displayToast(v: String){
         val toast: Toast = Toast.makeText(this, v, Toast.LENGTH_SHORT)
         toast.show()
-
     }
+
     private fun reset(){
         view.setBackgroundColor(Color.parseColor("#FFFDEF74"))
         blueBox.text = ""

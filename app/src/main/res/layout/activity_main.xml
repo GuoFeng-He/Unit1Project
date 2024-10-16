@@ -67,9 +67,10 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:textAlignment="center"
+        android:gravity="center"
         android:text=""
         android:textSize="64sp"
+        android:textStyle="bold"
         android:background="#FF90D3F1"/>
 
 
@@ -81,16 +82,21 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:textAlignment="center"
+        android:gravity="center"
         android:text=""
         android:textSize="64sp"
+        android:textStyle="bold"
         android:background="#FFFFB342" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/checkbox_text"
 
-
-
-
-
+        />
 
 
 </LinearLayout>

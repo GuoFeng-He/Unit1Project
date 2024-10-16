@@ -4,4 +4,5 @@
     <string name="score">Score: 0</string>
     <string name="strikes">Strikes: 0</string>
     <string name="button_text">START</string>
+    <string name="checkbox_text">Hard Mode</string>
 </resources>
