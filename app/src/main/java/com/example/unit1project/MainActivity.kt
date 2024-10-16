@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
@@ -21,10 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var orangeBox: TextView
     private lateinit var view: LinearLayout
     private lateinit var infoText: TextView
-
-
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,6 +108,7 @@ class MainActivity : AppCompatActivity() {
                 scoreText.setTextColor(Color.YELLOW)
             } else {
                 scoreText.setTextColor(Color.GREEN)
+                displayToast("You win!")
             }
             strikesText.setTextColor(Color.BLACK)
         } else if (text == "strikes") {
@@ -119,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                 strikesText.setTextColor(Color.YELLOW)
             } else {
                 strikesText.setTextColor(Color.RED)
+                displayToast("Sorry, you've lost")
             }
             scoreText.setTextColor(Color.BLACK)
         } else if (text == "reset"){
@@ -141,6 +140,11 @@ class MainActivity : AppCompatActivity() {
         return bigger
     }
 
+    private fun displayToast(v: String){
+        val toast: Toast = Toast.makeText(this, v, Toast.LENGTH_SHORT)
+        toast.show()
+
+    }
     private fun reset(){
         view.setBackgroundColor(Color.parseColor("#FFFDEF74"))
         blueBox.text = ""
